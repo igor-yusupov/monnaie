@@ -8,5 +8,5 @@ pub(super) struct Refresh {
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct GetSpendProof {
 	pub txid: String,
-	pub message: Option<String>
+	pub message: Option<String>,
 }
