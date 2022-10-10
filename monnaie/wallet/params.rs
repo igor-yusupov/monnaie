@@ -19,6 +19,21 @@ pub(super) struct CheckSpendProof {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+pub(super) struct GetReserveProof {
+	pub all: bool,
+	pub account_index: usize,
+	pub amount: usize,
+	pub message: Option<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct CheckReserveProof {
+	pub address: String,
+	pub message: Option<String>,
+	pub signature: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
 pub(super) struct MakeURI {
 	pub address: String,
 	pub amount: Option<usize>,

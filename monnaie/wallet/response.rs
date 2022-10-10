@@ -18,10 +18,14 @@ pub struct CheckSpendProof {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct GetReserveProof {
-	pub all: bool,
-	pub account_index: usize,
-	pub amount: usize,
-	pub message: Option<String>,
+	pub signature: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct CheckReserveProof {
+	pub good: bool,
+	pub spent: usize,
+	pub total: usize,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
