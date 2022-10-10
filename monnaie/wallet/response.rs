@@ -40,33 +40,25 @@ pub struct AddAddressBook {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct EditAddressBook {
-}
+pub struct EditAddressBook {}
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct DeleteAddressBook {
-}
+pub struct DeleteAddressBook {}
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct AutoRefresh {
-}
+pub struct AutoRefresh {}
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct RescanSpent {
-}
+pub struct RescanSpent {}
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct CreateWallet {
-}
+pub struct CreateWallet {}
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct OpenWallet {
-}
+pub struct OpenWallet {}
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct CloseWallet {
-}
+pub struct CloseWallet {}
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct ChangeWalletPaaword {
-}
+pub struct ChangeWalletPaaword {}

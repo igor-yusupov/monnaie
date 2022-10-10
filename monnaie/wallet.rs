@@ -78,10 +78,4 @@ impl Wallet {
 			)
 			.await
 	}
-
-	pub async fn get_address_book(&self, entries: Vec<usize>) {
-
-	}
-
-
 }
