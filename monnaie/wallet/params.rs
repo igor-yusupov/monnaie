@@ -62,9 +62,6 @@ pub(super) struct AutoRefresh {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub(super) struct RescanSpent {}
-
-#[derive(Debug, Deserialize, Serialize)]
 pub(super) struct CreateWallet {
 	pub filename: String,
 	pub password: Option<String>,
@@ -76,9 +73,6 @@ pub(super) struct OpenWallet {
 	pub filename: String,
 	pub password: Option<String>,
 }
-
-#[derive(Debug, Deserialize, Serialize)]
-pub(super) struct CloseWallet {}
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct ChangeWalletPaaword {

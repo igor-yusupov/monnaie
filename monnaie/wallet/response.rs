@@ -38,27 +38,3 @@ pub struct GetAddressBook {
 pub struct AddAddressBook {
 	pub index: usize,
 }
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct EditAddressBook {}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct DeleteAddressBook {}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct AutoRefresh {}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct RescanSpent {}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct CreateWallet {}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct OpenWallet {}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct CloseWallet {}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct ChangeWalletPaaword {}
