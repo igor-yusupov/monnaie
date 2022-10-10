@@ -2,6 +2,7 @@ use jsonrpsee::{core::client::ClientT, http_client::HttpClient, rpc_params};
 
 mod params;
 mod response;
+mod types;
 
 type Result<R> = std::result::Result<R, jsonrpsee::core::Error>;
 

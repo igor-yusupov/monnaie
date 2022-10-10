@@ -1,17 +1,9 @@
+use super::types::*;
 use serde::{Deserialize, Serialize};
-use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct Refresh {
 	pub start_height: Option<u32>,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "snake_case")]
-pub enum SecureSocketsLayerSupport {
-	Disabled,
-	Enabled,
-	Autodetect,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -47,12 +39,6 @@ pub(super) struct GetAddressIndex {
 pub(super) struct CreateAddress {
 	pub account_index: u32,
 	pub label: Option<String>,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct SubaddressIndex {
-	pub major: u32,
-	pub minor: u32,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -99,21 +85,6 @@ pub(super) struct UntagAccounts {
 pub(super) struct SetAccountTagDescription {
 	pub tag: String,
 	pub description: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Destination {
-	pub amount: u32,
-	pub address: String,
-}
-
-#[derive(Debug, Deserialize_repr, Serialize_repr)]
-#[repr(u32)]
-pub enum TransferPriority {
-	Default,
-	Unimportant,
-	Normal,
-	Elevated,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -216,25 +187,10 @@ pub(super) struct GetBulkPayments {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "snake_case")]
-pub enum TransferType {
-	All,
-	Available,
-	Unavailable,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
 pub(super) struct IncomingTransfers {
 	pub transfer_type: TransferType,
 	pub account_index: Option<u32>,
 	pub subaddr_indices: Option<Vec<u32>>,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "snake_case")]
-pub enum KeyType {
-	Mnemonic,
-	ViewKey,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
