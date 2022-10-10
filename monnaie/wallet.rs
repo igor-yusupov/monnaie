@@ -32,4 +32,56 @@ impl Wallet {
 			)
 			.await
 	}
+
+	pub async fn check_spend_proof(
+		&self,
+		txid: String,
+		message: Option<String>,
+		signature: String,
+	) -> Result<response::CheckSpendProof> {
+		self.http_client
+			.request(
+				"get_spend_proof",
+				rpc_params![params::CheckSpendProof {
+					txid,
+					message,
+					signature
+				}],
+			)
+			.await
+	}
+
+	pub async fn get_reserve_proof(&self) -> Result<response::GetReserveProof> {
+		self.http_client
+			.request("get_reserve_proof", rpc_params!())
+			.await
+	}
+
+	pub async fn make_uri(
+		&self,
+		address: String,
+		amount: Option<usize>,
+		payment_id: Option<String>,
+		recipient_name: Option<String>,
+		tx_description: Option<String>,
+	) -> Result<response::MakeURI> {
+		self.http_client
+			.request(
+				"make_uri",
+				rpc_params!([params::MakeURI {
+					address,
+					amount,
+					payment_id,
+					recipient_name,
+					tx_description,
+				}]),
+			)
+			.await
+	}
+
+	pub async fn get_address_book(&self, entries: Vec<usize>) {
+
+	}
+
+
 }
