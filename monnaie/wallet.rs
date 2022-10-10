@@ -29,7 +29,7 @@ impl Wallet {
 		self.http_client
 			.request(
 				"get_spend_proof",
-				rpc_params![params::GetSpendProof {txid, message }],
+				rpc_params![params::GetSpendProof { txid, message }],
 			)
 			.await
 	}
