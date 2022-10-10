@@ -245,3 +245,23 @@ pub struct GetAddressBook {
 pub struct AddAddressBook {
 	pub index: usize,
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Sign {
+	pub signature: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Verify {
+	pub good: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ExportOutputs {
+	pub outputs_data_hex: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ImportOutputs {
+	pub num_imported: String,
+}

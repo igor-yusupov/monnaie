@@ -347,3 +347,25 @@ pub(super) struct ChangeWalletPaaword {
 	pub old_password: Option<String>,
 	pub new_password: Option<String>,
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct Sign {
+	pub data: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct Verify {
+	pub data: String,
+	pub address: String,
+	pub signature: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct ExportOutputs {
+	pub all: Option<bool>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct ImportOutputs {
+	pub outputs_data_hex: String,
+}
