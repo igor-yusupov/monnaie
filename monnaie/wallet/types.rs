@@ -44,6 +44,13 @@ pub struct SubaddressAccountInformation {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+pub struct AccountTagInformation {
+	pub tag: String,
+	pub label: String,
+	pub accounts: Vec<u32>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Destination {
 	pub amount: u32,
 	pub address: String,
@@ -59,12 +66,26 @@ pub enum TransferPriority {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+pub struct PaymentInformation {
+	payment_id: String,
+	tx_hash: String,
+	amount: u32,
+	block_height: u32,
+	unlock_time: u32,
+	subaddr_index: SubaddressIndex,
+	address: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum TransferType {
 	All,
 	Available,
 	Unavailable,
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct TransferInformation {}
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
