@@ -21,6 +21,19 @@ impl Wallet {
 			.await
 	}
 
+	pub async fn get_spend_proof(
+		&self,
+		txid: String,
+		message: Option<String>,
+	) -> Result<response::GetSpendProof> {
+		self.http_client
+			.request(
+				"get_spend_proof",
+				rpc_params![params::GetSpendProof {txid, message }],
+			)
+			.await
+	}
+
 	pub async fn check_spend_proof(
 		&self,
 		txid: String,

@@ -258,6 +258,7 @@ pub(super) struct CheckTxProof {
 	pub signature: String,
 }
 
+#[derive(Debug, Deserialize, Serialize)]
 pub(super) struct GetSpendProof {
 	pub txid: String,
 	pub message: Option<String>,
