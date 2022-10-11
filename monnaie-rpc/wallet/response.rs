@@ -2,12 +2,6 @@ use super::types::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Refresh {
-	pub blocks_fetched: u32,
-	pub received_money: bool,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
 pub struct GetBalance {
 	pub balance: u32,
 	pub unlocked_balance: u32,
@@ -227,24 +221,15 @@ pub struct GetReserveProof {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct CheckReserveProof {
 	pub good: bool,
-	pub spent: usize,
-	pub total: usize,
+	pub spent: u32,
+	pub total: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct MakeURI {
-	pub uri: String,
-}
+// GetTransfers
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct GetAddressBook {
-	pub uri: String,
-}
+// GetTransferByTxid
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct AddAddressBook {
-	pub index: usize,
-}
+// DescribeTransfer
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Sign {
@@ -273,14 +258,35 @@ pub struct ExportKeyImages {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ImportKeyImages {
-	pub height: usize,
-	pub spent: usize,
-	pub unspent: usize,
+	pub height: u32,
+	pub spent: u32,
+	pub unspent: u32,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct MakeURI {
+	pub uri: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ParseURI {
 	pub uri: URI,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GetAddressBook {
+	pub uri: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct AddAddressBook {
+	pub index: u32,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Refresh {
+	pub blocks_fetched: u32,
+	pub received_money: bool,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -306,8 +312,8 @@ pub struct RestoreDeterministicWallet {
 pub struct IsMultisig {
 	pub multisig: bool,
 	pub ready: bool,
-	pub threshold: usize,
-	pub total: usize,
+	pub threshold: u32,
+	pub total: u32,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -328,11 +334,11 @@ pub struct ExportMultisigInfo {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ImportMultisigInfo {
-	n_outputs: usize,
+	n_outputs: u32,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub(super) struct FinalizeMultisig {
+pub struct FinalizeMultisig {
 	pub address: String,
 }
 
