@@ -143,7 +143,7 @@ pub struct TransferDescription {
 	pub change_address: String,
 	pub change_amount: u32,
 	pub fee: u32,
-	pub payment_id: String,
+	pub payment_id: Option<String>,
 	pub ring_size: u32,
 	pub unlock_time: u32,
 	pub dummy_outputs: u32,
@@ -166,8 +166,8 @@ pub struct KeyImage {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct PaymentURI {
 	pub address: String,
-	pub amount: u32,
+	pub amount: Option<u32>,
 	pub payment_id: Option<String>,
-	pub recipient_name: String,
-	pub tx_description: String,
+	pub recipient_name: Option<String>,
+	pub tx_description: Option<String>,
 }
