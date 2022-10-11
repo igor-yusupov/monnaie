@@ -93,3 +93,18 @@ pub enum KeyType {
 	Mnemonic,
 	ViewKey,
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct KeyImage {
+	pub key_image: String,
+	pub signature: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct URI {
+	pub address: String,
+	pub amount: usize,
+	pub payment_id: Option<String>,
+	pub recipient_name: String,
+	pub tx_description: String,
+}

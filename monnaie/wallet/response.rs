@@ -221,10 +221,14 @@ pub struct CheckSpendProof {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct GetReserveProof {
-	pub all: bool,
-	pub account_index: usize,
-	pub amount: usize,
-	pub message: Option<String>,
+	pub signature: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct CheckReserveProof {
+	pub good: bool,
+	pub spent: usize,
+	pub total: usize,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -240,4 +244,110 @@ pub struct GetAddressBook {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct AddAddressBook {
 	pub index: usize,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Sign {
+	pub signature: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Verify {
+	pub good: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ExportOutputs {
+	pub outputs_data_hex: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ImportOutputs {
+	pub num_imported: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ExportKeyImages {
+	pub signed_key_images: Vec<KeyImage>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ImportKeyImages {
+	pub height: usize,
+	pub spent: usize,
+	pub unspent: usize,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ParseURI {
+	pub uri: URI,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GetLanguages {
+	pub languages: Vec<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GenerateFromKeys {
+	pub address: String,
+	pub info: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct RestoreDeterministicWallet {
+	pub address: String,
+	pub info: String,
+	pub seed: String,
+	pub was_deprecated: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct IsMultisig {
+	pub multisig: bool,
+	pub ready: bool,
+	pub threshold: usize,
+	pub total: usize,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct PrepareMultisig {
+	pub multisig_info: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct MakeMultisig {
+	address: String,
+	multisig_info: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ExportMultisigInfo {
+	info: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ImportMultisigInfo {
+	n_outputs: usize,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct FinalizeMultisig {
+	pub address: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct SignMultisig {
+	pub tx_data_hex: String,
+	pub tx_hash_list: Vec<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct SubmitMultisig {
+	pub tx_hash_list: Vec<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GetVersion {
+	pub version: String,
 }

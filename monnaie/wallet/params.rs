@@ -258,6 +258,7 @@ pub(super) struct CheckTxProof {
 	pub signature: String,
 }
 
+#[derive(Debug, Deserialize, Serialize)]
 pub(super) struct GetSpendProof {
 	pub txid: String,
 	pub message: Option<String>,
@@ -266,6 +267,21 @@ pub(super) struct GetSpendProof {
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct CheckSpendProof {
 	pub txid: String,
+	pub message: Option<String>,
+	pub signature: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct GetReserveProof {
+	pub all: bool,
+	pub account_index: usize,
+	pub amount: usize,
+	pub message: Option<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct CheckReserveProof {
+	pub address: String,
 	pub message: Option<String>,
 	pub signature: String,
 }
@@ -330,4 +346,98 @@ pub(super) struct OpenWallet {
 pub(super) struct ChangeWalletPaaword {
 	pub old_password: Option<String>,
 	pub new_password: Option<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct Sign {
+	pub data: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct Verify {
+	pub data: String,
+	pub address: String,
+	pub signature: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct ExportOutputs {
+	pub all: Option<bool>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct ImportOutputs {
+	pub outputs_data_hex: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct ExportKeyImages {
+	pub all: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct ImportKeyImages {
+	pub signed_key_images: Vec<KeyImage>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct ParseURI {
+	pub uri: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct StartMining {
+	pub threads_count: usize,
+	pub do_background_mining: bool,
+	pub ignore_battery: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct GenerateFromKeys {
+	pub restore_height: i32,
+	pub filename: String,
+	pub address: String,
+	pub spendkey: Option<String>,
+	pub viewkey: String,
+	pub password: String,
+	pub autosave_current: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct RestoreDeterministicWallet {
+	pub filename: String,
+	pub password: String,
+	pub seed: String,
+	pub restore_height: Option<i32>,
+	pub language: Option<String>,
+	pub seed_offset: Option<String>,
+	pub autosave_current: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct MakeMultisig {
+	multisig_info: Vec<String>,
+	threshold: usize,
+	password: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct ImportMultisigInfo {
+	info: Vec<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct FinalizeMultisig {
+	pub multisig_info: Vec<String>,
+	pub password: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct SignMultisig {
+	pub tx_data_hex: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct SubmitMultisig {
+	pub tx_data_hex: String,
 }
