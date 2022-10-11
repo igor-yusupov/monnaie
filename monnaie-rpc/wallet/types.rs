@@ -67,13 +67,13 @@ pub enum TransferPriority {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct PaymentInformation {
-	payment_id: String,
-	tx_hash: String,
-	amount: u32,
-	block_height: u32,
-	unlock_time: u32,
-	subaddr_index: SubaddressIndex,
-	address: String,
+	pub payment_id: String,
+	pub tx_hash: String,
+	pub amount: u32,
+	pub block_height: u32,
+	pub unlock_time: u32,
+	pub subaddr_index: SubaddressIndex,
+	pub address: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -101,9 +101,9 @@ pub struct KeyImage {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct URI {
+pub struct PaymentURI {
 	pub address: String,
-	pub amount: usize,
+	pub amount: u32,
 	pub payment_id: Option<String>,
 	pub recipient_name: String,
 	pub tx_description: String,

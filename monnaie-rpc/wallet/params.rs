@@ -269,8 +269,8 @@ pub(super) struct CheckSpendProof {
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct GetReserveProof {
 	pub all: bool,
-	pub account_index: usize,
-	pub amount: usize,
+	pub account_index: u32,
+	pub amount: u32,
 	pub message: Option<String>,
 }
 
@@ -322,7 +322,7 @@ pub(super) struct ImportKeyImages {
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct MakeURI {
 	pub address: String,
-	pub amount: Option<usize>,
+	pub amount: Option<u32>,
 	pub payment_id: Option<String>,
 	pub recipient_name: Option<String>,
 	pub tx_description: Option<String>,
@@ -335,7 +335,7 @@ pub(super) struct ParseURI {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct GetAddressBook {
-	pub entries: Vec<usize>,
+	pub entries: Vec<u32>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -347,7 +347,7 @@ pub(super) struct AddAddressBook {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct EditAddressBook {
-	pub index: usize,
+	pub index: u32,
 	pub set_address: bool,
 	pub address: Option<String>,
 	pub set_description: bool,
@@ -358,7 +358,7 @@ pub(super) struct EditAddressBook {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct DeleteAddressBook {
-	pub index: usize,
+	pub index: u32,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -369,12 +369,12 @@ pub(super) struct Refresh {
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct AutoRefresh {
 	pub enable: bool,
-	pub period: Option<usize>,
+	pub period: Option<u32>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct StartMining {
-	pub threads_count: usize,
+	pub threads_count: u32,
 	pub do_background_mining: bool,
 	pub ignore_battery: bool,
 }
@@ -423,7 +423,7 @@ pub(super) struct ChangeWalletPaaword {
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct MakeMultisig {
 	multisig_info: Vec<String>,
-	threshold: usize,
+	threshold: u32,
 	password: String,
 }
 

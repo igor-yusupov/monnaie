@@ -270,7 +270,7 @@ pub struct MakeURI {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ParseURI {
-	pub uri: URI,
+	pub uri: PaymentURI,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

@@ -61,7 +61,7 @@ impl Wallet {
 	pub async fn make_uri(
 		&self,
 		address: String,
-		amount: Option<usize>,
+		amount: Option<u32>,
 		payment_id: Option<String>,
 		recipient_name: Option<String>,
 		tx_description: Option<String>,
