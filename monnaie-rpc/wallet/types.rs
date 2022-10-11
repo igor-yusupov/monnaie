@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
-use serde_repr::{Deserialize_repr, Serialize_repr};
+use serde_repr::Serialize_repr;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum SecureSocketsLayerSupport {
 	Disabled,
@@ -9,7 +9,7 @@ pub enum SecureSocketsLayerSupport {
 	Autodetect,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 pub struct SubaddressInformation {
 	pub address_index: u32,
 	pub address: String,
@@ -19,7 +19,7 @@ pub struct SubaddressInformation {
 	pub num_unspent_outputs: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 pub struct AddressInformation {
 	pub address: String,
 	pub label: String,
@@ -33,7 +33,7 @@ pub struct SubaddressIndex {
 	pub minor: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 pub struct SubaddressAccountInformation {
 	pub account_index: u32,
 	pub balance: u32,
@@ -43,7 +43,7 @@ pub struct SubaddressAccountInformation {
 	pub unlocked_balance: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 pub struct AccountTagInformation {
 	pub tag: String,
 	pub label: String,
@@ -56,7 +56,7 @@ pub struct Destination {
 	pub address: String,
 }
 
-#[derive(Debug, Deserialize_repr, Serialize_repr)]
+#[derive(Debug, Serialize_repr)]
 #[repr(u32)]
 pub enum TransferPriority {
 	Default,
@@ -65,7 +65,7 @@ pub enum TransferPriority {
 	Elevated,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 pub struct PaymentInformation {
 	pub payment_id: String,
 	pub tx_hash: String,
@@ -76,7 +76,7 @@ pub struct PaymentInformation {
 	pub address: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum IncomingTransferType {
 	All,
@@ -84,7 +84,7 @@ pub enum IncomingTransferType {
 	Unavailable,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum TransferType {
 	In,
@@ -94,7 +94,7 @@ pub enum TransferType {
 	Pool,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 pub struct TransferInformation {
 	pub address: String,
 	pub amount: u32,
@@ -113,7 +113,7 @@ pub struct TransferInformation {
 	pub unlock_time: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 pub struct SingleTransferInformation {
 	pub address: String,
 	pub amount: u32,
@@ -135,7 +135,7 @@ pub struct SingleTransferInformation {
 	pub unlock_time: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 pub struct TransferDescription {
 	pub amount_in: u32,
 	pub amount_out: u32,
@@ -150,7 +150,7 @@ pub struct TransferDescription {
 	pub extra: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum KeyType {
 	Mnemonic,
@@ -163,7 +163,7 @@ pub struct KeyImage {
 	pub signature: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 pub struct PaymentURI {
 	pub address: String,
 	pub amount: Option<u32>,
