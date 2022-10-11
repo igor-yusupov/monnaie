@@ -422,14 +422,14 @@ pub(super) struct ChangeWalletPaaword {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct MakeMultisig {
-	multisig_info: Vec<String>,
-	threshold: u32,
-	password: String,
+	pub multisig_info: Vec<String>,
+	pub threshold: u32,
+	pub password: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct ImportMultisigInfo {
-	info: Vec<String>,
+	pub info: Vec<String>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

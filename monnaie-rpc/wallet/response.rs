@@ -197,10 +197,10 @@ pub struct GetTxProof {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct CheckTxProof {
-	confirmations: u32,
-	good: bool,
-	in_pool: bool,
-	received: u32,
+	pub confirmations: u32,
+	pub good: bool,
+	pub in_pool: bool,
+	pub received: u32,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -323,18 +323,18 @@ pub struct PrepareMultisig {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct MakeMultisig {
-	address: String,
-	multisig_info: String,
+	pub address: String,
+	pub multisig_info: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ExportMultisigInfo {
-	info: String,
+	pub info: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ImportMultisigInfo {
-	n_outputs: u32,
+	pub n_outputs: u32,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
