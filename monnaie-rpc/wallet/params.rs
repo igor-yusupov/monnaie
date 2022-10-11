@@ -281,11 +281,32 @@ pub(super) struct CheckReserveProof {
 	pub signature: String,
 }
 
-// GetTransfers
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct GetTransfers {
+	#[serde(rename = "in")]
+	pub inp: Option<bool>,
+	pub out: Option<bool>,
+	pub pending: Option<bool>,
+	pub failed: Option<bool>,
+	pub pool: Option<bool>,
+	pub filter_by_height: Option<bool>,
+	pub min_height: Option<u32>,
+	pub max_height: Option<u32>,
+	pub account_index: Option<u32>,
+	pub subaddr_indices: Option<Vec<u32>>,
+}
 
-// GetTransferByTxid
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct GetTransferByTxid {
+	pub txid: String,
+	pub account_index: Option<u32>,
+}
 
-// DescribeTransfer
+#[derive(Debug, Deserialize, Serialize)]
+pub(super) struct DescribeTransfer {
+	pub unsigned_txset: Option<String>,
+	pub multisig_txset: Option<String>,
+}
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct Sign {
