@@ -78,14 +78,77 @@ pub struct PaymentInformation {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
-pub enum TransferType {
+pub enum IncomingTransferType {
 	All,
 	Available,
 	Unavailable,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct TransferInformation {}
+#[serde(rename_all = "snake_case")]
+pub enum TransferType {
+	In,
+	Out,
+	Pending,
+	Failed,
+	Pool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct TransferInformation {
+	pub address: String,
+	pub amount: u32,
+	pub confirmations: u32,
+	pub double_spend_seen: bool,
+	pub fee: u32,
+	pub height: u32,
+	pub note: String,
+	pub payment_id: String,
+	pub subaddr_index: SubaddressIndex,
+	pub suggested_confirmations_threshold: u32,
+	pub timestamp: u32,
+	pub txid: String,
+	#[serde(rename = "type")]
+	pub transfer_type: TransferType,
+	pub unlock_time: u32,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct SingleTransferInformation {
+	pub address: String,
+	pub amount: u32,
+	pub amounts: Vec<u32>,
+	pub confirmations: u32,
+	pub destinations: Vec<Destination>,
+	pub double_spend_seen: bool,
+	pub fee: u32,
+	pub height: u32,
+	pub locked: bool,
+	pub note: String,
+	pub payment_id: String,
+	pub subaddr_index: SubaddressIndex,
+	pub suggested_confirmations_threshold: u32,
+	pub timestamp: u32,
+	pub txid: String,
+	#[serde(rename = "type")]
+	pub transfer_type: TransferType,
+	pub unlock_time: u32,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct TransferDescription {
+	pub amount_in: u32,
+	pub amount_out: u32,
+	pub recipients: Vec<Destination>,
+	pub change_address: String,
+	pub change_amount: u32,
+	pub fee: u32,
+	pub payment_id: String,
+	pub ring_size: u32,
+	pub unlock_time: u32,
+	pub dummy_outputs: u32,
+	pub extra: String,
+}
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]

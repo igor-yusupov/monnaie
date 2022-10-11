@@ -225,11 +225,26 @@ pub struct CheckReserveProof {
 	pub total: u32,
 }
 
-// GetTransfers
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GetTransfers {
+	#[serde(rename = "in")]
+	pub inp: Option<Vec<TransferInformation>>,
+	pub out: Option<Vec<TransferInformation>>,
+	pub pending: Option<Vec<TransferInformation>>,
+	pub failed: Option<Vec<TransferInformation>>,
+	pub pool: Option<Vec<TransferInformation>>,
+}
 
-// GetTransferByTxid
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GetTransferByTxid {
+	pub transfer: SingleTransferInformation,
+	pub transfers: Vec<SingleTransferInformation>,
+}
 
-// DescribeTransfer
+#[derive(Debug, Deserialize, Serialize)]
+pub struct DescribeTransfer {
+	pub desc: Vec<TransferDescription>,
+}
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Sign {

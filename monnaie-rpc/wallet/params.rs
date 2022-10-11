@@ -183,7 +183,7 @@ pub(super) struct GetBulkPayments {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(super) struct IncomingTransfers {
-	pub transfer_type: TransferType,
+	pub transfer_type: IncomingTransferType,
 	pub account_index: Option<u32>,
 	pub subaddr_indices: Option<Vec<u32>>,
 }
