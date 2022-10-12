@@ -1,5 +1,5 @@
 use jsonrpsee::http_client::HttpClientBuilder;
-use monnaie_rpc::wallet::Wallet;
+use monnaie_wrapper::wallet::Wallet;
 
 #[tokio::main]
 async fn main() {

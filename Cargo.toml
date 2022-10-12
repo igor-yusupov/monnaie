@@ -2,5 +2,5 @@
 
 members = [
   "monnaie",
-  "monnaie-rpc",
+  "monnaie-wrapper",
 ]

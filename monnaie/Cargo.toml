@@ -10,7 +10,7 @@ name = "monnaie"
 path = "main.rs"
 
 [dependencies]
-monnaie-rpc = { version = "0.1", path = "../monnaie-rpc" }
+monnaie-wrapper = { version = "0.1", path = "../monnaie-wrapper" }
 tokio = { version = "1", features = ["full"] }
 jsonrpsee = { version = "0.15", features = ["full"] }
 clap = "4"

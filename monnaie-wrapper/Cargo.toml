@@ -1,5 +1,5 @@
 [package]
-name = "monnaie-rpc"
+name = "monnaie-wrapper"
 version = "0.1.0"
 edition = "2021"
 
