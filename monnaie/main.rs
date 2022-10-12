@@ -13,5 +13,5 @@ async fn main() {
 			.unwrap(),
 	);
 
-	println!("{:?}", wallet.refresh(None).await.unwrap());
+	let _ = wallet;
 }
