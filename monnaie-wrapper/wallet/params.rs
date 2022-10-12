@@ -1,6 +1,8 @@
 use super::types::*;
 use serde::Serialize;
+use serde_with::skip_serializing_none;
 
+#[skip_serializing_none]
 #[derive(Debug, Serialize)]
 pub struct SetDaemon {
 	pub address: Option<String>,
@@ -382,6 +384,7 @@ pub struct DeleteAddressBook {
 	pub index: u32,
 }
 
+#[skip_serializing_none]
 #[derive(Debug, Serialize)]
 pub struct Refresh {
 	pub start_height: Option<u32>,

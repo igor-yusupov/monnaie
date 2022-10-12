@@ -1,34 +1,26 @@
+use jsonrpsee::http_client::HttpClientBuilder;
 use lazy_static::lazy_static;
-
-mod helpers;
+use monnaie_wrapper::wallet::{params, Wallet};
 
 lazy_static! {
-	static ref SHARED: std::sync::Mutex<bool> = std::sync::Mutex::new(false);
+	static ref W: Wallet = {
+		Wallet::new(
+			HttpClientBuilder::default()
+				.build(
+					std::env::var("MONERO_WALLET_ADDRESS")
+						.unwrap_or_else(|_| String::from("http://localhost:38082/json_rpc")),
+				)
+				.unwrap(),
+		)
+	};
 }
 
 #[tokio::test]
-async fn get_and_set_shared_state() {
-	let mut shared = SHARED.lock().unwrap();
+async fn wallet_refresh() {
+	let response = W.refresh(params::Refresh { start_height: None }).await;
 
-	assert_eq!(*shared, false);
+	let response = response.unwrap();
 
-	*shared = true;
+	assert_eq!(response.blocks_fetched, 0);
+	assert_eq!(response.received_money, false);
 }
-
-#[tokio::test]
-async fn get_shared_state() {
-	loop {
-		let shared = { SHARED.lock().unwrap().clone() };
-
-		if !shared {
-			continue;
-		}
-
-		assert!(shared);
-
-		break;
-	}
-}
-
-#[tokio::test]
-async fn wallet_set_daemon() {}
