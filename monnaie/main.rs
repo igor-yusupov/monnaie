@@ -1,4 +1,4 @@
-use jsonrpsee::http_client::HttpClientBuilder;
+use monnaie_wrapper::remote_procedure_call::HttpClientBuilder;
 use monnaie_wrapper::wallet::Wallet;
 
 #[tokio::main]
