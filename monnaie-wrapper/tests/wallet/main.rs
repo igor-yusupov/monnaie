@@ -19,7 +19,7 @@ lazy_static! {
 async fn wallet_set_daemon() {
 	let response = W
 		.set_daemon(params::SetDaemon {
-			address: Some(String::from("http://localhost:38082/json_rpc")),
+			address: Some(String::from("http://localhost:38089")),
 			trusted: Some(true),
 			ssl_support: None,
 			ssl_private_key_path: None,
