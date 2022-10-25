@@ -60,7 +60,7 @@ pub struct GetHeight {
 
 #[derive(Debug, Deserialize)]
 pub struct Transfer {
-	pub amount: u32,
+	pub amount: u64,
 	pub fee: u32,
 	pub multisig_txset: String,
 	pub tx_blob: String,
@@ -137,17 +137,17 @@ pub struct RelayTx {
 
 #[derive(Debug, Deserialize)]
 pub struct GetPayments {
-	pub payments: Vec<PaymentInformation>,
+	pub payments: Option<Vec<PaymentInformation>>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct GetBulkPayments {
-	pub payments: Vec<PaymentInformation>,
+	pub payments: Option<Vec<PaymentInformation>>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct IncomingTransfers {
-	pub transfers: Vec<TransferInformation>,
+	pub transfers: Option<Vec<IncomingTransferInformation>>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -164,7 +164,7 @@ pub struct MakeIntegratedAddress {
 #[derive(Debug, Deserialize)]
 pub struct SplitIntegratedAddress {
 	pub is_subaddress: bool,
-	pub payment: String,
+	pub payment_id: String,
 	pub standard_address: String,
 }
 

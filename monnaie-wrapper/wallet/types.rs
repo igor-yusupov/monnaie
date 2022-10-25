@@ -52,7 +52,7 @@ pub struct AccountTagInformation {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Destination {
-	pub amount: u32,
+	pub amount: u64,
 	pub address: String,
 }
 
@@ -69,7 +69,7 @@ pub enum TransferPriority {
 pub struct PaymentInformation {
 	pub payment_id: String,
 	pub tx_hash: String,
-	pub amount: u32,
+	pub amount: u64,
 	pub block_height: u32,
 	pub unlock_time: u32,
 	pub subaddr_index: SubaddressIndex,
@@ -95,9 +95,24 @@ pub enum TransferType {
 }
 
 #[derive(Debug, Deserialize)]
+pub struct IncomingTransferInformation {
+	pub amount: u64,
+	pub block_height: u32,
+	pub frozen: bool,
+	pub global_index: u32,
+	pub key_image: String,
+	pub pubkey: String,
+	pub spent: bool,
+	pub subaddr_index: SubaddressIndex,
+	pub tx_hash: String,
+	pub tx_size: Option<String>,
+	pub unlocked: bool,
+}
+
+#[derive(Debug, Deserialize)]
 pub struct TransferInformation {
 	pub address: String,
-	pub amount: u32,
+	pub amount: u64,
 	pub confirmations: u32,
 	pub double_spend_seen: bool,
 	pub fee: u32,
@@ -116,7 +131,7 @@ pub struct TransferInformation {
 #[derive(Debug, Deserialize)]
 pub struct SingleTransferInformation {
 	pub address: String,
-	pub amount: u32,
+	pub amount: u64,
 	pub amounts: Vec<u32>,
 	pub confirmations: u32,
 	pub destinations: Vec<Destination>,
@@ -141,7 +156,7 @@ pub struct TransferDescription {
 	pub amount_out: u32,
 	pub recipients: Vec<Destination>,
 	pub change_address: String,
-	pub change_amount: u32,
+	pub change_amount: u64,
 	pub fee: u32,
 	pub payment_id: Option<String>,
 	pub ring_size: u32,

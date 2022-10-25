@@ -272,7 +272,7 @@ pub struct CheckSpendProof {
 pub struct GetReserveProof {
 	pub all: bool,
 	pub account_index: u32,
-	pub amount: u32,
+	pub amount: u64,
 	pub message: Option<String>,
 }
 
@@ -471,3 +471,6 @@ pub struct SignMultisig {
 pub struct SubmitMultisig {
 	pub tx_data_hex: String,
 }
+
+#[derive(Debug, Serialize)]
+pub struct Empty {}
