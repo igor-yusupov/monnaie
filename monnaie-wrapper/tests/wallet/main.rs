@@ -9,7 +9,7 @@ lazy_static! {
 			HttpClientBuilder::default()
 				.build(
 					std::env::var("MONERO_WALLET_ADDRESS")
-						.unwrap_or_else(|_| String::from("http://localhost:18082/json_rpc")),
+						.unwrap_or_else(|_| String::from("http://localhost:38089/json_rpc")),
 				)
 				.unwrap(),
 		)
@@ -18,17 +18,9 @@ lazy_static! {
 
 #[tokio::test]
 async fn wallet_set_daemon() {
-	let address = W
-		.get_address(params::GetAddress {
-			account_index: 0,
-			address_index: None,
-		})
-		.await
-		.unwrap()
-		.address;
 	let response = W
 		.set_daemon(params::SetDaemon {
-			address: Some(address),
+			address: Some(String::from("http://localhost:38089")),
 			trusted: Some(true),
 			ssl_support: None,
 			ssl_private_key_path: None,
