@@ -170,7 +170,7 @@ pub struct SplitIntegratedAddress {
 
 #[derive(Debug, Deserialize)]
 pub struct GetTxNotes {
-	pub notes: Vec<String>,
+	pub notes: Option<Vec<String>>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -198,7 +198,7 @@ pub struct GetTxProof {
 #[derive(Debug, Deserialize)]
 pub struct CheckTxProof {
 	pub confirmations: u32,
-	pub good: bool,
+	pub good: Option<bool>,
 	pub in_pool: bool,
 	pub received: u32,
 }

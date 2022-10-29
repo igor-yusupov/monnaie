@@ -9,37 +9,45 @@ lazy_static! {
 			HttpClientBuilder::default()
 				.build(
 					std::env::var("MONERO_WALLET_ADDRESS")
-						.unwrap_or_else(|_| String::from("http://localhost:38089/json_rpc")),
+						.unwrap_or_else(|_| String::from("http://localhost:18082/json_rpc")),
 				)
 				.unwrap(),
 		)
 	};
 }
 
-// #[tokio::test]
-// async fn wallet_set_daemon() {
-// 	let response = W
-// 		.set_daemon(params::SetDaemon {
-// 			address: Some(String::from("http://localhost:38089")),
-// 			trusted: Some(true),
-// 			ssl_support: None,
-// 			ssl_private_key_path: None,
-// 			ssl_certificate_path: None,
-// 			ssl_ca_file: None,
-// 			ssl_allowed_fingerprints: None,
-// 			ssl_allow_any_cert: None,
-// 		})
-// 		.await;
+#[tokio::test]
+async fn wallet_set_daemon() {
+	let address = W
+		.get_address(params::GetAddress {
+			account_index: 0,
+			address_index: None,
+		})
+		.await
+		.unwrap()
+		.address;
+	let response = W
+		.set_daemon(params::SetDaemon {
+			address: Some(address),
+			trusted: Some(true),
+			ssl_support: None,
+			ssl_private_key_path: None,
+			ssl_certificate_path: None,
+			ssl_ca_file: None,
+			ssl_allowed_fingerprints: None,
+			ssl_allow_any_cert: None,
+		})
+		.await;
 
-// 	let _ = response.unwrap();
-// }
+	response.unwrap();
+}
 
 #[tokio::test]
 async fn wallet_refresh() {
 	let response = W.refresh(params::Refresh { start_height: None }).await;
 	let response = response.unwrap();
 
-	assert_eq!(response.blocks_fetched, 0);
+	// assert_eq!(response.blocks_fetched, 0);
 	assert_eq!(response.received_money, false);
 }
 
@@ -56,22 +64,31 @@ async fn get_address() {
 
 #[tokio::test]
 async fn sweep_all() {
-	// let address = W.get_address(params::GetAddress { account_index: 0, address_index: None }).await.unwrap().address;
-	// let response = W.sweep_all(params::SweepAll {
-	// 	address: address,
-	// 	account_index: 0,
-	// 	subaddr_indices: None,
-	// 	priority: None,
-	// 	mixin: 0,
-	// 	ring_size: 1,
-	// 	unlock_time: 0,
-	// 	get_tx_keys: None,
-	// 	below_amount: None,
-	// 	do_not_relay: None,
-	// 	get_tx_hex: None,
-	// 	get_tx_metadata: None,
-	// }).await;
-	// let response = response.unwrap();
+	// let address = W
+	// 	.get_address(params::GetAddress {
+	// 		account_index: 0,
+	// 		address_index: None,
+	// 	})
+	// 	.await
+	// 	.unwrap()
+	// 	.address;
+	// let response = W
+	// 	.sweep_all(params::SweepAll {
+	// 		address: address,
+	// 		account_index: 0,
+	// 		subaddr_indices: None,
+	// 		priority: None,
+	// 		mixin: 0,
+	// 		ring_size: 1,
+	// 		unlock_time: 0,
+	// 		get_tx_keys: None,
+	// 		below_amount: None,
+	// 		do_not_relay: None,
+	// 		get_tx_hex: None,
+	// 		get_tx_metadata: None,
+	// 	})
+	// 	.await;
+	// response.unwrap();
 
 	// TODO: выдает ошибку No unlocked balance in the specified account
 }
@@ -178,45 +195,142 @@ async fn stop_wallet() {
 
 #[tokio::test]
 async fn rescan_blockchain() {
-	// TODO
+	// Выполняется долго
+	// let response = W.rescan_blockchain(params::Empty { }).await;
+	// response.unwrap();
 }
 
 #[tokio::test]
 async fn set_tx_notes() {
-	// TODO
+	let response = W
+		.set_tx_notes(params::SetTxNotes {
+			txids: vec![],
+			notes: vec![],
+		})
+		.await;
+	response.unwrap();
 }
 
 #[tokio::test]
 async fn get_tx_notes() {
-	// TODO
+	let response = W.get_tx_notes(params::GetTxNotes { txids: vec![] }).await;
+	response.unwrap();
 }
 
 #[tokio::test]
 async fn set_attribute() {
-	// TODO
+	let response = W
+		.set_attribute(params::SetAttribute {
+			key: String::from("key"),
+			value: String::from("value"),
+		})
+		.await;
+	response.unwrap();
 }
 
 #[tokio::test]
 async fn get_attribute() {
-	// TODO
+	let _ = W
+		.set_attribute(params::SetAttribute {
+			key: String::from("new_key"),
+			value: String::from("new_value"),
+		})
+		.await;
+
+	let response = W
+		.get_attribute(params::GetAttribute {
+			key: String::from("new_key"),
+		})
+		.await;
+	let response = response.unwrap();
+	assert_eq!(response.value, String::from("new_value"));
 }
 
 #[tokio::test]
-async fn get_tx_key() {
-	// TODO
-}
+async fn tx_tests() {
+	let new_address = W
+		.create_address(params::CreateAddress {
+			account_index: 0,
+			label: None,
+		})
+		.await
+		.unwrap()
+		.address;
 
-#[tokio::test]
-async fn check_tx_key() {
-	// TODO
-}
+	let _ = W
+		.transfer(params::Transfer {
+			destinations: vec![types::Destination {
+				amount: 200000000,
+				address: String::from(&new_address),
+			}],
+			account_index: Some(0),
+			subaddr_indices: None,
+			priority: types::TransferPriority::Default,
+			mixin: 0,
+			ring_size: 7,
+			unlock_time: 0,
+			get_tx_key: Some(true),
+			do_not_relay: None,
+			get_tx_hex: Some(true),
+			get_tx_metadata: None,
+		})
+		.await;
 
-#[tokio::test]
-async fn get_tx_proof() {
-	// TODO
-}
+	let transfer = W
+		.get_transfers(params::GetTransfers {
+			inp: None,
+			out: Some(true),
+			pending: None,
+			failed: None,
+			pool: None,
+			filter_by_height: None,
+			min_height: None,
+			max_height: None,
+			account_index: Some(0),
+			subaddr_indices: None,
+		})
+		.await;
+	let transfer = transfer.unwrap();
+	let transfer_out = transfer.out.unwrap();
+	let txid = &transfer_out[transfer_out.len() - 1].txid;
+	let address = &transfer_out[transfer_out.len() - 1].address;
+	let response = W
+		.get_tx_key(params::GetTxKey {
+			txid: txid.to_string(),
+		})
+		.await;
+	let response = response.unwrap();
 
-#[tokio::test]
-async fn check_tx_proof() {
-	// TODO
+	assert_eq!(response.tx_key.is_empty(), false);
+
+	let resposne_check_tx_key = W
+		.check_tx_key(params::CheckTxKey {
+			txid: txid.to_string(),
+			tx_key: response.tx_key,
+			address: String::from(&new_address),
+		})
+		.await;
+	resposne_check_tx_key.unwrap();
+	let response_get_tx_proof = W
+		.get_tx_proof(params::GetTxProof {
+			txid: txid.to_string(),
+			address: address.to_string(),
+			message: None,
+		})
+		.await;
+
+	let response_get_tx_proof = response_get_tx_proof.unwrap();
+
+	assert_eq!(response_get_tx_proof.signature.is_empty(), false);
+
+	let response_check_tx_proof = W
+		.check_tx_proof(params::CheckTxProof {
+			txid: txid.to_string(),
+			address: address.to_string(),
+			message: None,
+			signature: (&response_get_tx_proof.signature).to_string(),
+		})
+		.await
+		.unwrap();
+	assert_eq!(response_check_tx_proof.in_pool, false);
 }

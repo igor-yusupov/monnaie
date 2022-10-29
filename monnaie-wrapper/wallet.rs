@@ -32,6 +32,15 @@ impl Wallet {
 		self.http_client.request("get_address", Some(params)).await
 	}
 
+	pub async fn create_address(
+		&self,
+		params: params::CreateAddress,
+	) -> Result<response::CreateAddress> {
+		self.http_client
+			.request("create_address", Some(params))
+			.await
+	}
+
 	pub async fn sweep_all(&self, params: params::SweepAll) -> Result<response::SweepAll> {
 		self.http_client.request("sweep_all", Some(params)).await
 	}
@@ -41,7 +50,7 @@ impl Wallet {
 	}
 
 	pub async fn relay_tx(&self, params: params::RelayTx) -> Result<response::RelayTx> {
-		self.http_client.request("sweep_all", Some(params)).await
+		self.http_client.request("relay_tx", Some(params)).await
 	}
 
 	pub async fn store(&self, params: params::Empty) -> Result<Empty> {
@@ -94,5 +103,68 @@ impl Wallet {
 
 	pub async fn stop_wallet(&self, params: params::Empty) -> Result<Empty> {
 		self.http_client.request("stop_wallet", Some(params)).await
+	}
+
+	pub async fn rescan_blockchain(&self, params: params::Empty) -> Result<Empty> {
+		self.http_client
+			.request("rescan_blockchain", Some(params))
+			.await
+	}
+
+	pub async fn set_tx_notes(&self, params: params::SetTxNotes) -> Result<Empty> {
+		self.http_client.request("set_tx_notes", Some(params)).await
+	}
+
+	pub async fn get_tx_notes(&self, params: params::GetTxNotes) -> Result<response::GetTxNotes> {
+		self.http_client.request("get_tx_notes", Some(params)).await
+	}
+
+	pub async fn set_attribute(&self, params: params::SetAttribute) -> Result<Empty> {
+		self.http_client
+			.request("set_attribute", Some(params))
+			.await
+	}
+
+	pub async fn get_attribute(
+		&self,
+		params: params::GetAttribute,
+	) -> Result<response::GetAttribute> {
+		self.http_client
+			.request("get_attribute", Some(params))
+			.await
+	}
+
+	pub async fn get_tx_proof(&self, params: params::GetTxProof) -> Result<response::GetTxProof> {
+		self.http_client.request("get_tx_proof", Some(params)).await
+	}
+
+	pub async fn check_tx_proof(
+		&self,
+		params: params::CheckTxProof,
+	) -> Result<response::CheckTxProof> {
+		self.http_client
+			.request("check_tx_proof", Some(params))
+			.await
+	}
+
+	pub async fn transfer(&self, params: params::Transfer) -> Result<response::Transfer> {
+		self.http_client.request("transfer", Some(params)).await
+	}
+
+	pub async fn get_transfers(
+		&self,
+		params: params::GetTransfers,
+	) -> Result<response::GetTransfers> {
+		self.http_client
+			.request("get_transfers", Some(params))
+			.await
+	}
+
+	pub async fn get_tx_key(&self, params: params::GetTxKey) -> Result<response::GetTxKey> {
+		self.http_client.request("get_tx_key", Some(params)).await
+	}
+
+	pub async fn check_tx_key(&self, params: params::CheckTxKey) -> Result<response::CheckTxKey> {
+		self.http_client.request("check_tx_key", Some(params)).await
 	}
 }

@@ -117,10 +117,12 @@ pub struct TransferInformation {
 	pub double_spend_seen: bool,
 	pub fee: u32,
 	pub height: u32,
+	pub locked: bool,
 	pub note: String,
 	pub payment_id: String,
 	pub subaddr_index: SubaddressIndex,
-	pub suggested_confirmations_threshold: u32,
+	pub subaddr_indices: Vec<SubaddressIndex>,
+	pub suggested_confirmations_threshold: Option<u32>,
 	pub timestamp: u32,
 	pub txid: String,
 	#[serde(rename = "type")]
