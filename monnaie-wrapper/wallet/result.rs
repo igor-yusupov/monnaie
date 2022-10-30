@@ -1,4 +1,4 @@
-use super::types::*;
+use super::models::*;
 use serde::Deserialize;
 
 #[derive(Deserialize)]

@@ -1,4 +1,4 @@
-use super::types::*;
+use super::models::*;
 use serde::Serialize;
 use serde_with::skip_serializing_none;
 

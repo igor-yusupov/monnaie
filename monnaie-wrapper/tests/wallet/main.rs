@@ -1,5 +1,5 @@
 use lazy_static::lazy_static;
-use monnaie_wrapper::wallet::types;
+use monnaie_wrapper::wallet::models;
 use monnaie_wrapper::wallet::{params, Wallet};
 
 mod helpers;
@@ -118,7 +118,7 @@ async fn get_bulk_payments() {
 async fn incoming_transfers() {
 	let response = W
 		.incoming_transfers(params::IncomingTransfers {
-			transfer_type: types::IncomingTransferType::All,
+			transfer_type: models::IncomingTransferType::All,
 			account_index: Some(0),
 			subaddr_indices: None,
 		})
@@ -131,7 +131,7 @@ async fn incoming_transfers() {
 async fn query_key() {
 	let response = W
 		.query_key(params::QueryKey {
-			key_type: types::KeyType::Mnemonic,
+			key_type: models::KeyType::Mnemonic,
 		})
 		.await;
 	response.unwrap();
@@ -243,13 +243,13 @@ async fn tx_tests() {
 
 	let _ = W
 		.transfer(params::Transfer {
-			destinations: vec![types::Destination {
+			destinations: vec![models::Destination {
 				amount: 200000000,
 				address: String::from(&new_address),
 			}],
 			account_index: Some(0),
 			subaddr_indices: None,
-			priority: types::TransferPriority::Default,
+			priority: models::TransferPriority::Default,
 			mixin: 0,
 			ring_size: 7,
 			unlock_time: 0,
