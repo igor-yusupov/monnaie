@@ -1,5 +1,3 @@
-use serde::Deserialize;
-
 use crate::remote_procedure_call::HttpClient;
 
 pub mod params;
@@ -12,15 +10,12 @@ pub struct Wallet {
 	http_client: HttpClient,
 }
 
-#[derive(Deserialize)]
-pub struct Empty {}
-
 impl Wallet {
 	pub fn new(http_client: HttpClient) -> Self {
 		Wallet { http_client }
 	}
 
-	pub async fn set_daemon(&self, params: params::SetDaemon) -> Result<Empty> {
+	pub async fn set_daemon(&self, params: params::SetDaemon) -> Result<response::Empty> {
 		self.http_client.request("set_daemon", Some(params)).await
 	}
 
@@ -53,7 +48,7 @@ impl Wallet {
 		self.http_client.request("relay_tx", Some(params)).await
 	}
 
-	pub async fn store(&self, params: params::Empty) -> Result<Empty> {
+	pub async fn store(&self, params: params::Empty) -> Result<response::Empty> {
 		self.http_client.request("store", Some(params)).await
 	}
 
@@ -101,17 +96,17 @@ impl Wallet {
 			.await
 	}
 
-	pub async fn stop_wallet(&self, params: params::Empty) -> Result<Empty> {
+	pub async fn stop_wallet(&self, params: params::Empty) -> Result<response::Empty> {
 		self.http_client.request("stop_wallet", Some(params)).await
 	}
 
-	pub async fn rescan_blockchain(&self, params: params::Empty) -> Result<Empty> {
+	pub async fn rescan_blockchain(&self, params: params::Empty) -> Result<response::Empty> {
 		self.http_client
 			.request("rescan_blockchain", Some(params))
 			.await
 	}
 
-	pub async fn set_tx_notes(&self, params: params::SetTxNotes) -> Result<Empty> {
+	pub async fn set_tx_notes(&self, params: params::SetTxNotes) -> Result<response::Empty> {
 		self.http_client.request("set_tx_notes", Some(params)).await
 	}
 
@@ -119,7 +114,7 @@ impl Wallet {
 		self.http_client.request("get_tx_notes", Some(params)).await
 	}
 
-	pub async fn set_attribute(&self, params: params::SetAttribute) -> Result<Empty> {
+	pub async fn set_attribute(&self, params: params::SetAttribute) -> Result<response::Empty> {
 		self.http_client
 			.request("set_attribute", Some(params))
 			.await

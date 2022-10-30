@@ -1,6 +1,9 @@
 use super::types::*;
 use serde::Deserialize;
 
+#[derive(Deserialize)]
+pub struct Empty {}
+
 #[derive(Debug, Deserialize)]
 pub struct GetBalance {
 	pub balance: u32,
