@@ -1,8 +1,8 @@
 use crate::remote_procedure_call::HttpClient;
 
+pub mod models;
 pub mod params;
 pub mod result;
-pub mod models;
 
 type Result<T> = std::result::Result<T, jsonrpsee::core::Error>;
 

@@ -1,6 +1,5 @@
 use lazy_static::lazy_static;
-use monnaie_wrapper::wallet::models;
-use monnaie_wrapper::wallet::{params, Wallet};
+use monnaie_wrapper::wallet::{models, params, Wallet};
 
 mod helpers;
 
@@ -10,7 +9,7 @@ lazy_static! {
 
 #[tokio::test]
 async fn wallet_set_daemon() {
-	let response = W
+	let result = W
 		.set_daemon(params::SetDaemon {
 			address: Some(String::from("http://localhost:38089")),
 			trusted: Some(true),
@@ -23,27 +22,27 @@ async fn wallet_set_daemon() {
 		})
 		.await;
 
-	response.unwrap();
+	result.unwrap();
 }
 
 #[tokio::test]
 async fn wallet_refresh() {
-	let response = W.refresh(params::Refresh { start_height: None }).await;
-	let response = response.unwrap();
+	let result = W.refresh(params::Refresh { start_height: None }).await;
+	let result = result.unwrap();
 
-	// assert_eq!(response.blocks_fetched, 0);
-	assert_eq!(response.received_money, false);
+	// assert_eq!(result.blocks_fetched, 0);
+	assert_eq!(result.received_money, false);
 }
 
 #[tokio::test]
 async fn get_address() {
-	let response = W
+	let result = W
 		.get_address(params::GetAddress {
 			account_index: 0,
 			address_index: None,
 		})
 		.await;
-	response.unwrap();
+	result.unwrap();
 }
 
 #[tokio::test]
@@ -56,7 +55,7 @@ async fn sweep_all() {
 	// 	.await
 	// 	.unwrap()
 	// 	.address;
-	// let response = W
+	// let result = W
 	// 	.sweep_all(params::SweepAll {
 	// 		address: address,
 	// 		account_index: 0,
@@ -72,7 +71,7 @@ async fn sweep_all() {
 	// 		get_tx_metadata: None,
 	// 	})
 	// 	.await;
-	// response.unwrap();
+	// result.unwrap();
 
 	// TODO: выдает ошибку No unlocked balance in the specified account
 }
@@ -89,127 +88,127 @@ async fn relay_tx() {
 
 #[tokio::test]
 async fn store() {
-	let response = W.store(params::Empty {}).await;
-	response.unwrap();
+	let result = W.store(params::Empty {}).await;
+	result.unwrap();
 }
 
 #[tokio::test]
 async fn get_payments() {
-	let response = W
+	let result = W
 		.get_payments(params::GetPayments {
 			payment_id: String::from("60900e5603bf96e3"),
 		})
 		.await;
-	response.unwrap();
+	result.unwrap();
 }
 
 #[tokio::test]
 async fn get_bulk_payments() {
-	let response = W
+	let result = W
 		.get_bulk_payments(params::GetBulkPayments {
 			payment_ids: vec![String::from("60900e5603bf96e3")],
 			min_block_height: 120000,
 		})
 		.await;
-	response.unwrap();
+	result.unwrap();
 }
 
 #[tokio::test]
 async fn incoming_transfers() {
-	let response = W
+	let result = W
 		.incoming_transfers(params::IncomingTransfers {
 			transfer_type: models::IncomingTransferType::All,
 			account_index: Some(0),
 			subaddr_indices: None,
 		})
 		.await;
-	let response = response.unwrap();
-	assert_eq!(response.transfers.unwrap()[0].frozen, false);
+	let result = result.unwrap();
+	assert_eq!(result.transfers.unwrap()[0].frozen, false);
 }
 
 #[tokio::test]
 async fn query_key() {
-	let response = W
+	let result = W
 		.query_key(params::QueryKey {
 			key_type: models::KeyType::Mnemonic,
 		})
 		.await;
-	response.unwrap();
+	result.unwrap();
 }
 
 #[tokio::test]
 async fn make_integrated_address() {
-	let response = W
+	let result = W
 		.make_integrated_address(params::MakeIntegratedAddress {
 			standard_address: None,
 			payment_id: None,
 		})
 		.await;
-	let response = response.unwrap();
-	assert_eq!(response.integrated_address.is_empty(), false);
-	assert_eq!(response.payment_id.is_empty(), false);
+	let result = result.unwrap();
+	assert_eq!(result.integrated_address.is_empty(), false);
+	assert_eq!(result.payment_id.is_empty(), false);
 }
 
 #[tokio::test]
 async fn split_integrated_address() {
-	let response = W
+	let result = W
 		.make_integrated_address(params::MakeIntegratedAddress {
 			standard_address: None,
 			payment_id: None,
 		})
 		.await;
-	let integrated_address = response.unwrap().integrated_address;
+	let integrated_address = result.unwrap().integrated_address;
 
-	let response = W
+	let result = W
 		.split_integrated_address(params::SplitIntegratedAddress {
 			integrated_address: integrated_address,
 		})
 		.await;
-	let response = response.unwrap();
-	assert_eq!(response.is_subaddress, false);
-	assert_eq!(response.payment_id.is_empty(), false);
-	assert_eq!(response.standard_address.is_empty(), false);
+	let result = result.unwrap();
+	assert_eq!(result.is_subaddress, false);
+	assert_eq!(result.payment_id.is_empty(), false);
+	assert_eq!(result.standard_address.is_empty(), false);
 }
 
 #[tokio::test]
 async fn stop_wallet() {
-	// let response = W.stop_wallet(params::Empty {}).await;
-	// response.unwrap();
+	// let result = W.stop_wallet(params::Empty {}).await;
+	// result.unwrap();
 }
 
 #[tokio::test]
 async fn rescan_blockchain() {
 	// Выполняется долго
-	// let response = W.rescan_blockchain(params::Empty { }).await;
-	// response.unwrap();
+	// let result = W.rescan_blockchain(params::Empty { }).await;
+	// result.unwrap();
 }
 
 #[tokio::test]
 async fn set_tx_notes() {
-	let response = W
+	let result = W
 		.set_tx_notes(params::SetTxNotes {
 			txids: vec![],
 			notes: vec![],
 		})
 		.await;
-	response.unwrap();
+	result.unwrap();
 }
 
 #[tokio::test]
 async fn get_tx_notes() {
-	let response = W.get_tx_notes(params::GetTxNotes { txids: vec![] }).await;
-	response.unwrap();
+	let result = W.get_tx_notes(params::GetTxNotes { txids: vec![] }).await;
+	result.unwrap();
 }
 
 #[tokio::test]
 async fn set_attribute() {
-	let response = W
+	let result = W
 		.set_attribute(params::SetAttribute {
 			key: String::from("key"),
 			value: String::from("value"),
 		})
 		.await;
-	response.unwrap();
+	result.unwrap();
 }
 
 #[tokio::test]
@@ -221,13 +220,13 @@ async fn get_attribute() {
 		})
 		.await;
 
-	let response = W
+	let result = W
 		.get_attribute(params::GetAttribute {
 			key: String::from("new_key"),
 		})
 		.await;
-	let response = response.unwrap();
-	assert_eq!(response.value, String::from("new_value"));
+	let result = result.unwrap();
+	assert_eq!(result.value, String::from("new_value"));
 }
 
 #[tokio::test]
@@ -278,24 +277,24 @@ async fn tx_tests() {
 	let transfer_out = transfer.out.unwrap();
 	let txid = &transfer_out[transfer_out.len() - 1].txid;
 	let address = &transfer_out[transfer_out.len() - 1].address;
-	let response = W
+	let result = W
 		.get_tx_key(params::GetTxKey {
 			txid: txid.to_string(),
 		})
 		.await;
-	let response = response.unwrap();
+	let result = result.unwrap();
 
-	assert_eq!(response.tx_key.is_empty(), false);
+	assert_eq!(result.tx_key.is_empty(), false);
 
 	let resposne_check_tx_key = W
 		.check_tx_key(params::CheckTxKey {
 			txid: txid.to_string(),
-			tx_key: response.tx_key,
+			tx_key: result.tx_key,
 			address: String::from(&new_address),
 		})
 		.await;
 	resposne_check_tx_key.unwrap();
-	let response_get_tx_proof = W
+	let result_get_tx_proof = W
 		.get_tx_proof(params::GetTxProof {
 			txid: txid.to_string(),
 			address: address.to_string(),
@@ -303,18 +302,18 @@ async fn tx_tests() {
 		})
 		.await;
 
-	let response_get_tx_proof = response_get_tx_proof.unwrap();
+	let result_get_tx_proof = result_get_tx_proof.unwrap();
 
-	assert_eq!(response_get_tx_proof.signature.is_empty(), false);
+	assert_eq!(result_get_tx_proof.signature.is_empty(), false);
 
-	let response_check_tx_proof = W
+	let result_check_tx_proof = W
 		.check_tx_proof(params::CheckTxProof {
 			txid: txid.to_string(),
 			address: address.to_string(),
 			message: None,
-			signature: (&response_get_tx_proof.signature).to_string(),
+			signature: (&result_get_tx_proof.signature).to_string(),
 		})
 		.await
 		.unwrap();
-	assert_eq!(response_check_tx_proof.in_pool, false);
+	assert_eq!(result_check_tx_proof.in_pool, false);
 }
