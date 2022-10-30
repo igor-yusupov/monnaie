@@ -1,19 +1,11 @@
 use lazy_static::lazy_static;
-use monnaie_wrapper::remote_procedure_call::HttpClientBuilder;
 use monnaie_wrapper::wallet::types;
 use monnaie_wrapper::wallet::{params, Wallet};
 
+mod helpers;
+
 lazy_static! {
-	static ref W: Wallet = {
-		Wallet::new(
-			HttpClientBuilder::default()
-				.build(
-					std::env::var("MONERO_WALLET_ADDRESS")
-						.unwrap_or_else(|_| String::from("http://localhost:38089/json_rpc")),
-				)
-				.unwrap(),
-		)
-	};
+	static ref W: Wallet = helpers::create_wallet_from_env_or_default();
 }
 
 #[tokio::test]
