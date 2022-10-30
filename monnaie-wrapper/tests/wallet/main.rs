@@ -8,7 +8,7 @@ lazy_static! {
 }
 
 #[tokio::test]
-async fn wallet_set_daemon() {
+async fn set_daemon() {
 	let result = W
 		.set_daemon(params::SetDaemon {
 			address: Some(String::from("http://localhost:38089")),
@@ -26,7 +26,7 @@ async fn wallet_set_daemon() {
 }
 
 #[tokio::test]
-async fn wallet_refresh() {
+async fn refresh() {
 	let result = W.refresh(params::Refresh { start_height: None }).await;
 	let result = result.unwrap();
 
