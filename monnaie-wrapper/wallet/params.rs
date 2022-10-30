@@ -2,6 +2,9 @@ use super::models::*;
 use serde::Serialize;
 use serde_with::skip_serializing_none;
 
+#[derive(Debug, Serialize)]
+pub struct Empty {}
+
 #[skip_serializing_none]
 #[derive(Debug, Serialize)]
 pub struct SetDaemon {
@@ -471,6 +474,3 @@ pub struct SignMultisig {
 pub struct SubmitMultisig {
 	pub tx_data_hex: String,
 }
-
-#[derive(Debug, Serialize)]
-pub struct Empty {}
