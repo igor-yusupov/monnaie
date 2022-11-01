@@ -1,5 +1,8 @@
-use super::types::*;
+use super::models::*;
 use serde::Deserialize;
+
+#[derive(Deserialize)]
+pub struct Empty {}
 
 #[derive(Debug, Deserialize)]
 pub struct GetBalance {
@@ -60,7 +63,7 @@ pub struct GetHeight {
 
 #[derive(Debug, Deserialize)]
 pub struct Transfer {
-	pub amount: u32,
+	pub amount: u64,
 	pub fee: u32,
 	pub multisig_txset: String,
 	pub tx_blob: String,
@@ -137,17 +140,17 @@ pub struct RelayTx {
 
 #[derive(Debug, Deserialize)]
 pub struct GetPayments {
-	pub payments: Vec<PaymentInformation>,
+	pub payments: Option<Vec<PaymentInformation>>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct GetBulkPayments {
-	pub payments: Vec<PaymentInformation>,
+	pub payments: Option<Vec<PaymentInformation>>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct IncomingTransfers {
-	pub transfers: Vec<TransferInformation>,
+	pub transfers: Option<Vec<IncomingTransferInformation>>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -164,13 +167,13 @@ pub struct MakeIntegratedAddress {
 #[derive(Debug, Deserialize)]
 pub struct SplitIntegratedAddress {
 	pub is_subaddress: bool,
-	pub payment: String,
+	pub payment_id: String,
 	pub standard_address: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct GetTxNotes {
-	pub notes: Vec<String>,
+	pub notes: Option<Vec<String>>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -198,7 +201,7 @@ pub struct GetTxProof {
 #[derive(Debug, Deserialize)]
 pub struct CheckTxProof {
 	pub confirmations: u32,
-	pub good: bool,
+	pub good: Option<bool>,
 	pub in_pool: bool,
 	pub received: u32,
 }

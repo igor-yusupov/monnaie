@@ -1,6 +1,9 @@
-use super::types::*;
+use super::models::*;
 use serde::Serialize;
 use serde_with::skip_serializing_none;
+
+#[derive(Debug, Serialize)]
+pub struct Empty {}
 
 #[skip_serializing_none]
 #[derive(Debug, Serialize)]
@@ -272,7 +275,7 @@ pub struct CheckSpendProof {
 pub struct GetReserveProof {
 	pub all: bool,
 	pub account_index: u32,
-	pub amount: u32,
+	pub amount: u64,
 	pub message: Option<String>,
 }
 
